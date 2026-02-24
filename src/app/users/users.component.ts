@@ -14,19 +14,19 @@ export class UsersComponent {
 users: string[] = [];
 newUser = "";
 
- ngOnInit() {
-    this.users = this.userService.getUsers();
-  }
+//  ngOnInit() {
+//     this.users = this.userService.getUsers();
+//   }
 
- addUser() {
-    this.userService.addUser(this.newUser);
-    this.newUser = "";
-  }
+//  addUser() {
+//     this.userService.addUser(this.newUser);
+//     this.newUser = "";
+//   }
 
 
-   deleteUser(i: number) {
-    this.userService.deleteUser(i);
-  }
+//    deleteUser(i: number) {
+//     this.userService.deleteUser(i);
+//   }
 
 // addUser() {
 //   if (this.newUser) {
@@ -38,6 +38,28 @@ newUser = "";
 // deleteUser(index: number) {
 //   this.users.splice(index, 1);
 // }
+
+
+
+ngOnInit() {
+  this.loadUsers();
+}
+
+loadUsers() {
+  this.userService.getUsers()
+    .subscribe(data => this.users = data);
+}
+
+addUser() {
+  this.userService.addUser({ name: this.newUser })
+    .subscribe(() => this.loadUsers());
+}
+
+deleteUser(id: number) {
+  this.userService.deleteUser(id)
+    .subscribe(() => this.loadUsers());
+}
+
 
 
 }
