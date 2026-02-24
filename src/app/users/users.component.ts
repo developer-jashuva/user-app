@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-users',
@@ -9,15 +10,34 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-users = ["Sai", "Ravi", "Anu"];
-
+  constructor(private userService: UserService) {}
+users: string[] = [];
 newUser = "";
 
-addUser() {
-  if (this.newUser) {
-    this.users.push(this.newUser);
+ ngOnInit() {
+    this.users = this.userService.getUsers();
+  }
+
+ addUser() {
+    this.userService.addUser(this.newUser);
     this.newUser = "";
   }
-}
+
+
+   deleteUser(i: number) {
+    this.userService.deleteUser(i);
+  }
+
+// addUser() {
+//   if (this.newUser) {
+//     this.users.push(this.newUser);
+//     this.newUser = "";
+//   }
+// }
+
+// deleteUser(index: number) {
+//   this.users.splice(index, 1);
+// }
+
 
 }
