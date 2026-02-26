@@ -9,3 +9,8 @@
 
 <input [(ngModel)]="newUser" placeholder="Enter name">
 <button (click)="addUser()">Add</button>
+
+<form (ngSubmit)="addUser()">
+  <input formControlName="name">
+  <button>Add</button>
+</form>

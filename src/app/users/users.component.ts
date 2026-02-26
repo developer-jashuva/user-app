@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  constructor(private userService: UserService) {}
+   constructor(private userService: UserService) {}
 users: string[] = [];
 newUser = "";
 
@@ -41,6 +41,7 @@ newUser = "";
 
 
 
+
 ngOnInit() {
   this.loadUsers();
 }
@@ -59,6 +60,7 @@ deleteUser(id: number) {
   this.userService.deleteUser(id)
     .subscribe(() => this.loadUsers());
 }
+
 
 
 

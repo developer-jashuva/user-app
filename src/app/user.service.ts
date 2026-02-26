@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +25,14 @@ export class UserService {
   // constructor() { }
 
 
+form: FormGroup;
 
-constructor(private http: HttpClient) {}
+constructor(private fb: FormBuilder,private http: HttpClient) {
+  this.form = this.fb.group({
+    name: ['']
+  });
+}
+// constructor(private http: HttpClient) {}
 
 getUsers() {
   return this.http.get<any[]>('http://localhost:3000/users');
